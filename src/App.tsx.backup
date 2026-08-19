@@ -145,9 +145,6 @@ function ContactUs() {
         </Heading>
         <Text type="body" color="secondary" justify="center" style={{ lineHeight: '1.7' }}>
           궁금한 점이 있으신가요? 언제든 문의해 주세요. 빠르게 답변드리겠습니다.
-          <Text type="body" color="secondary" justify="center" style={{ lineHeight: "1.7", marginTop: "var(--spacing-2)" }}>
-            대표메일: hunylee0@gmail.com
-          </Text>
         </Text>
         <Card variant="default" style={{ width: '100%', padding: 'var(--spacing-6)' }}>
           <Stack gap={4}>
@@ -233,9 +230,6 @@ function Footer() {
           <Link href="/privacy" style={{ color: 'var(--color-text-secondary)' }}>개인정보처리방침</Link>
           <Link href="/terms" style={{ color: 'var(--color-text-secondary)' }}>이용약관</Link>
         </Stack>
-        <Text type="supporting" color="disabled">
-          사업자 등록번호: 440-09-03154 | 대표메일: hunylee0@gmail.com
-        </Text>
         <Text type="supporting" color="disabled">
           © {currentYear} NextRun Inc. All rights reserved.
         </Text>
