@@ -96,10 +96,10 @@ function Products() {
           {products.map((product, index) => (
             <Card key={index} variant="default" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
               <Stack gap={4} padding={6}>
-                <div style={{ 
-                  width: '64px', 
-                  height: '64px', 
-                  borderRadius: 'var(--radius-lg)', 
+                <div style={{
+                  width: '64px',
+                  height: '64px',
+                  borderRadius: 'var(--radius-lg)',
                   background: 'var(--accent-bg)',
                   display: 'flex',
                   alignItems: 'center',
@@ -164,7 +164,7 @@ function ContactUs() {
               type="email"
               value={email}
               onChange={setEmail}
-              placeholder="hong@nextrun.com"
+              placeholder="hong@nextrun.site"
               isRequired
               width="100%"
             />
@@ -192,17 +192,13 @@ function ContactUs() {
         <Stack gap={2} hAlign="center">
           <Text type="label" color="secondary">또는 직접 연락주세요</Text>
           <Stack gap={6} hAlign="center" wrap="wrap">
-            <Link href="mailto:contact@nextrun.com" style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-2)' }}>
+            <Link href="mailto:hunylee0@gmail.com" style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-2)' }}>
               <Icon icon="calendar" size="sm" />
-              contact@nextrun.com
+              hunylee0@gmail.com
             </Link>
-            <Link href="tel:+82-2-1234-5678" style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-2)' }}>
-              <Icon icon="clock" size="sm" />
-              +82-2-1234-5678
-            </Link>
-            <Link href="https://nextrun.com" target="_blank" rel="noopener" style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-2)' }}>
+            <Link href="https://nextrun.site" target="_blank" rel="noopener" style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-2)' }}>
               <Icon icon="externalLink" size="sm" />
-              nextrun.com
+              nextrun.site
             </Link>
           </Stack>
         </Stack>
@@ -213,7 +209,7 @@ function ContactUs() {
 
 function Footer() {
   const currentYear = new Date().getFullYear();
-  
+
   return (
     <LayoutFooter style={{ padding: 'var(--spacing-6) var(--spacing-4)', borderTop: '1px solid var(--border)' }}>
       <Stack gap={4} hAlign="center" justify="between" wrap="wrap" style={{ maxWidth: '1200px', margin: '0 auto' }}>
