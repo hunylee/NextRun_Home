@@ -4,7 +4,7 @@
 
 ### 1. Menu Implementation
 - Keep top categories in order: 소개, 제품소개, 소식, Q&A, Contact Us.
-- Use section anchors in `src/App.tsx`; 소개 links to 회사 소개/연혁, and 제품소개 links to the three product sections.
+- Each menu item is a page (`pagePaths` in `src/site.ts`); 소개's submenu links to 회사 소개/연혁 on `/about/`, and 제품소개's submenu links to the products overview and the three product detail pages. 채용 is on hold.
 - Ensure proper href anchoring to corresponding sections
 - Maintain accessibility standards (aria-label, keyboard navigation)
 
@@ -54,7 +54,7 @@
 
 ### 9. Rebuild Verification and Content Boundaries
 - Run `npm run lint`, `npm run build`, and `node --experimental-strip-types --test tests/site.test.mjs`.
-- In the Vite page console run `await (await import('/tests/browser-smoke.js')).smoke()` for `/`, `/en/`, and `/ja/`; inspect desktop/mobile screenshots. The check resets inputs and sends nothing.
+- In the Vite page console run `await (await import('/tests/browser-smoke.js')).smoke()` on each page in `/`, `/en/`, and `/ja/`; inspect desktop/mobile screenshots. The check resets inputs and sends nothing.
 - Keep the bright neutral/deep-green design in `src/App.css`, with `--nr-*` tokens, visible focus, and reduced-motion support.
 - AI 실시간 Gloss 기반 자막 is Gloss-based, real-time speech-to-caption translation intended for Deaf users, not standard transcription. Religious facilities, hospital desks, airports, and KTX are potential uses, not verified customers.
 - Validate contact fields and encode subject/body in the shared `emailDraft` helper. Draft preparation is not sending; retain the email-app step and direct-email fallback. Add a backend only for direct web submission.

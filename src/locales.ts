@@ -13,7 +13,7 @@ const ko = {
   aboutText: 'NextRun은 AI 수어 전문 회사입니다. 듣는 사람에게 익숙한 방식을 그대로 옮기는 대신, 농인의 언어와 정보 접근 방식을 고민합니다. 수어 아바타부터 생활 공간의 자막까지, 일상에 필요한 연결을 만들어갑니다.',
   company: '회사 소개', history: '연혁', historyTitle: 'NextRun이 걸어온 길', historyEmpty: '공개할 연혁을 정리하고 있습니다. 확인된 주요 이력을 이곳에 안내하겠습니다.',
   productsLabel: '제품소개', productsTitle: '다른 상황,\n하나의 목표.', productsIntro: '정보가 필요한 순간, 누구에게나 닿을 수 있도록. 세 가지 제품 방향을 소개합니다.',
-  productDetail: '제품 방향', productContact: '이 제품 문의하기', demoLink: '시연 화면 보기',
+  productContact: '이 제품 문의하기',
   products: [
     { name: 'AI 실사 수어 아바타', tag: '정보를 수어로', description: '실제 사람처럼 자연스러운 실사형 AI 아바타가 정보를 수어로 전달합니다. 글만으로 전달하기 어려운 안내를 시각적인 언어로 연결하는 제품을 지향합니다.', points: ['실사형 아바타의 수어 표현', '디지털 안내와 콘텐츠 활용', '사용 환경에 맞춘 도입 상담'] },
     { name: 'AI 실시간 Gloss 기반 자막', tag: '농인을 위한 자막', description: '음성을 실시간으로 농인 자막으로 번역하는 제품입니다. 표준 자막을 그대로 보여주는 것이 아니라, Gloss 기반으로 농인의 언어적 이해를 고려하는 방향을 지향합니다.', points: ['음성에서 농인 자막으로', 'Gloss 기반의 정보 표현', '생활 공간의 실시간 안내'] },
@@ -30,9 +30,9 @@ const ko = {
   questions: [
     ['일반 자막과 농인 자막은 어떻게 다른가요?', '일반 자막이 음성을 글로 옮기는 데 초점을 둔다면, NextRun의 AI 실시간 자막은 Gloss 기반으로 농인의 언어적 이해를 고려하는 방향을 지향합니다. 실제 표현 방식과 제공 범위는 도입 상담에서 안내합니다.'],
     ['어떤 공간에서 사용할 수 있나요?', '공공기관, 법원, 학교, 학술 세미나, 공연장·극장, 병원, 공항·KTX, 종교시설(교회·성당 등)처럼 말로 정보가 전달되는 공간을 폭넓게 활용 대상으로 고려하고 있습니다. 환경별 적용 가능 여부는 문의해 주세요.'],
-    ['SyncSL은 직접 볼 수 있나요?', '현재 데모 버전까지 개발했으며, 이 페이지의 SyncSL 시연에서 실제 시연 화면을 바탕으로 한 이미지를 볼 수 있습니다. 데모 시연이나 협업을 원하시면 Contact Us로 문의해 주세요.'],
+    ['SyncSL은 직접 볼 수 있나요?', '현재 데모 버전까지 개발했으며, SyncSL 솔루션 페이지에서 실제 시연 화면을 바탕으로 한 이미지를 볼 수 있습니다. 데모 시연이나 협업을 원하시면 Contact Us로 문의해 주세요.'],
     ['영어·일본어 페이지는 해당 수어도 지원한다는 뜻인가요?', '아닙니다. 홈페이지의 한국어·영어·일본어 지원과 제품의 수어 지원 범위는 별개입니다. 제품별 지원 수어와 제공 일정은 별도로 문의해 주세요.'],
-    ['제품 도입이나 협업은 어떻게 문의하나요?', '아래 Contact Us에서 이메일, 제목, 내용을 작성해 이메일 초안을 만들거나 hunylee0@gmail.com으로 직접 연락해 주세요. 제품별 제공 범위와 일정은 상담을 통해 확인할 수 있습니다.'],
+    ['제품 도입이나 협업은 어떻게 문의하나요?', 'Contact Us 페이지에서 이메일, 제목, 내용을 작성해 이메일 초안을 만들거나 hunylee0@gmail.com으로 직접 연락해 주세요. 제품별 제공 범위와 일정은 상담을 통해 확인할 수 있습니다.'],
   ],
   contactTitle: '당신의 현장 이야기를\n들려주세요.', contactIntro: '제품 도입, 협업, 궁금한 점까지.\n어떤 소통이 필요한지 함께 이야기해요.',
   email: '이메일', subject: '제목', message: '내용', subjectPlaceholder: '어떤 도움이 필요하신가요?', messagePlaceholder: '사용할 공간과 필요한 안내 내용을 알려주세요.',
@@ -41,7 +41,20 @@ const ko = {
   ready: '초안이 준비되었습니다. 아직 전송되지 않았습니다. 이메일 앱에서 내용을 확인하고 보내주세요.',
   invalid: '이메일 형식과 제목·내용을 확인해 주세요. 공백만 입력할 수 없습니다.',
   privacy: '주민등록번호, 건강 정보 등 민감한 개인정보는 작성하지 마세요.',
-  footerLine: '모두의 일상을 잇는 AI 수어 기술.', business: '사업자 번호', representative: '대표', representativeName: '이태헌', top: '맨 위로',
+  pageMeta: {
+    about: ['소개 | NextRun', 'NextRun은 농인의 언어와 정보 접근 방식을 중심으로 AI 수어 기술을 만드는 회사입니다. 회사 소개와 연혁, 회사 정보를 안내합니다.'],
+    products: ['제품소개 | NextRun', 'AI 실사 수어 아바타, AI 실시간 Gloss 기반 자막, SyncSL 솔루션. NextRun의 세 가지 AI 수어 제품을 소개합니다.'],
+    news: ['소식 | NextRun', 'NextRun의 제품 소식과 활동을 전합니다.'],
+    qa: ['Q&A | NextRun', '농인 자막, 활용 공간, SyncSL 시연, 도입 문의 등 NextRun 제품에 대해 자주 묻는 질문을 모았습니다.'],
+    contact: ['Contact Us | NextRun', '제품 도입, 협업, 궁금한 점을 NextRun에 문의하세요. 이메일 초안을 만들어 hunylee0@gmail.com으로 보낼 수 있습니다.'],
+    notFound: ['페이지를 찾을 수 없습니다 | NextRun', '요청하신 페이지를 찾을 수 없습니다.'],
+  },
+  allProducts: '제품 전체 보기', more: '자세히 보기', aboutMore: 'NextRun 소개 보기', breadcrumb: '현재 위치', homeLabel: '홈',
+  openMenu: '메뉴 열기', closeMenu: '메뉴 닫기', submenu: '하위 메뉴',
+  features: '주요 특징', otherProducts: '다른 제품', valuesTitle: 'NextRun이 일하는 방식', aboutProducts: 'NextRun이 만드는 제품',
+  companyInfo: '회사 정보', companyName: '회사명',
+  notFoundTitle: '페이지를 찾을 수 없습니다.', notFoundText: '주소가 바뀌었거나 없는 페이지입니다. 홈이나 메뉴에서 원하시는 정보를 찾아보세요.', backHome: '홈으로 가기',
+  footerLine: '모두의 일상을 잇는 AI 수어 기술.', business: '사업자 번호', representative: '대표', representativeName: '이태헌',
 };
 
 const en: typeof ko = {
@@ -59,7 +72,7 @@ const en: typeof ko = {
   aboutText: 'NextRun is an AI sign-language company. Rather than simply adapting communication designed for hearing people, we focus on how Deaf people use language and access information. From sign-language avatars to captions in shared spaces, we work toward everyday connections.',
   company: 'Our company', history: 'Our history', historyTitle: 'The NextRun journey', historyEmpty: 'We are preparing our company history. Verified milestones will be shared here.',
   productsLabel: 'PRODUCTS', productsTitle: 'Different settings.\nOne purpose.', productsIntro: 'Helping information reach everyone, when it matters. Explore our three product directions.',
-  productDetail: 'Product direction', productContact: 'Ask about this product', demoLink: 'See the demo',
+  productContact: 'Ask about this product',
   products: [
     { name: 'AI photorealistic sign-language avatar', tag: 'Information into sign language', description: 'A lifelike, photorealistic AI avatar that communicates information in sign language, bringing visual language to guidance that text alone may not convey.', points: ['Sign language from a lifelike avatar', 'Digital guidance and content', 'Consultation for your setting'] },
     { name: 'AI real-time Gloss-based captions', tag: 'Captions for Deaf users', description: 'A product intended to translate speech into captions for Deaf users in real time. Rather than displaying standard captions, its Gloss-based approach considers how Deaf users understand language.', points: ['From speech to Deaf-oriented captions', 'Gloss-based information representation', 'Real-time guidance in everyday spaces'] },
@@ -76,9 +89,9 @@ const en: typeof ko = {
   questions: [
     ['How are Deaf-oriented captions different from standard captions?', 'Standard captions focus on transcribing speech. NextRun’s AI real-time captions aim to use a Gloss-based approach that considers how Deaf people understand language. Contact us for details on expression and product scope.'],
     ['Where could these products be used?', 'Potential settings include public offices, courts, schools, academic seminars, theaters, hospitals, airports and KTX, and religious facilities such as churches and cathedrals: anywhere information is delivered by voice. Contact us to discuss suitability for your environment.'],
-    ['Can I see SyncSL in action?', 'SyncSL has been developed through a demo version. The SyncSL demo on this page shows an image based on a real demo screen. Contact us if you would like a live demo or to discuss a collaboration.'],
+    ['Can I see SyncSL in action?', 'SyncSL has been developed through a demo version. The SyncSL solution page shows an image based on a real demo screen. Contact us if you would like a live demo or to discuss a collaboration.'],
     ['Do the English and Japanese pages mean those sign languages are supported?', 'No. The website’s Korean, English, and Japanese translations are separate from product sign-language support. Please ask about the supported sign languages and availability for each product.'],
-    ['How can I ask about a product or collaboration?', 'Use Contact Us below to prepare an email with your address, subject, and message, or write directly to hunylee0@gmail.com. Product scope and schedules are discussed individually.'],
+    ['How can I ask about a product or collaboration?', 'Use the Contact Us page to prepare an email with your address, subject, and message, or write directly to hunylee0@gmail.com. Product scope and schedules are discussed individually.'],
   ],
   contactTitle: 'Tell us about\nyour everyday setting.', contactIntro: 'Products, partnerships, or a question.\nLet’s talk about the communication you need.',
   email: 'Email', subject: 'Subject', message: 'Message', subjectPlaceholder: 'How can we help?', messagePlaceholder: 'Tell us about your setting and the information you need to share.',
@@ -87,7 +100,20 @@ const en: typeof ko = {
   ready: 'Your draft is ready, but has not been sent. Review and send it in your email app.',
   invalid: 'Check your email address, subject, and message. Fields cannot contain only whitespace.',
   privacy: 'Please do not include sensitive personal information, such as identification numbers or health details.',
-  footerLine: 'AI sign-language technology for everyday life.', business: 'Business registration', representative: 'Representative', representativeName: '이태헌 (Lee Tae-heon)', top: 'Back to top',
+  pageMeta: {
+    about: ['About | NextRun', 'NextRun builds AI sign-language technology around how Deaf people use language and access information. Learn about our company, history, and details.'],
+    products: ['Products | NextRun', 'A photorealistic AI sign-language avatar, real-time Gloss-based captions, and the SyncSL solution: NextRun’s three AI sign-language products.'],
+    news: ['News | NextRun', 'Product updates and company activities from NextRun.'],
+    qa: ['Q&A | NextRun', 'Common questions about NextRun products: Deaf-oriented captions, settings, the SyncSL demo, and how to get in touch.'],
+    contact: ['Contact Us | NextRun', 'Ask NextRun about products, partnerships, or anything else. Prepare an email draft to hunylee0@gmail.com.'],
+    notFound: ['Page not found | NextRun', 'The page you requested could not be found.'],
+  },
+  allProducts: 'All products', more: 'Learn more', aboutMore: 'About NextRun', breadcrumb: 'Breadcrumb', homeLabel: 'Home',
+  openMenu: 'Open menu', closeMenu: 'Close menu', submenu: 'submenu',
+  features: 'Key features', otherProducts: 'Other products', valuesTitle: 'How we work', aboutProducts: 'What we make',
+  companyInfo: 'Company details', companyName: 'Company',
+  notFoundTitle: 'Page not found.', notFoundText: 'This address may have changed or does not exist. Try the home page or the menu.', backHome: 'Go to home',
+  footerLine: 'AI sign-language technology for everyday life.', business: 'Business registration', representative: 'Representative', representativeName: '이태헌 (Lee Tae-heon)',
 };
 
 const ja: typeof ko = {
@@ -105,7 +131,7 @@ const ja: typeof ko = {
   aboutText: 'NextRunはAI手話の専門企業です。聞こえる人に慣れ親しんだ方法をそのまま移すのではなく、ろう者の言語や情報へのアクセスを考えます。手話アバターから生活空間の字幕まで、日常に必要なつながりを目指しています。',
   company: '会社紹介', history: '沿革', historyTitle: 'NextRunの歩み', historyEmpty: '公開する沿革を整理しています。確認済みの主な歩みをこちらでお知らせします。',
   productsLabel: '製品紹介', productsTitle: '異なる場面。\nひとつの目的。', productsIntro: '必要な情報が、必要なときに、誰にでも届くように。3つの製品の方向性をご紹介します。',
-  productDetail: '製品の方向性', productContact: 'この製品について相談', demoLink: 'デモ画面を見る',
+  productContact: 'この製品について相談',
   products: [
     { name: 'AI実写手話アバター', tag: '情報を手話へ', description: '実在の人物のように自然な実写型AIアバターが、情報を手話で伝えます。文字だけでは伝わりにくい案内を、視覚的な言語につなぐ製品を目指しています。', points: ['実写型アバターによる手話表現', 'デジタル案内やコンテンツへの活用', '利用環境に合わせた導入相談'] },
     { name: 'AIリアルタイムGlossベース字幕', tag: 'ろう者のための字幕', description: '音声をリアルタイムでろう者向け字幕に翻訳する製品です。一般的な字幕をそのまま表示するのではなく、Glossに基づき、ろう者の言語的な理解に配慮する方向性を目指しています。', points: ['音声からろう者向け字幕へ', 'Glossに基づく情報表現', '生活空間でのリアルタイム案内'] },
@@ -122,9 +148,9 @@ const ja: typeof ko = {
   questions: [
     ['一般的な字幕とろう者向け字幕はどう違いますか？', '一般的な字幕は音声の文字起こしを中心としています。NextRunのAIリアルタイム字幕は、Glossに基づき、ろう者の言語的な理解に配慮する方向性を目指しています。具体的な表現方法や提供範囲は導入相談でご案内します。'],
     ['どのような場所で利用できますか？', '公共機関、裁判所、学校、学術セミナー、劇場・ホール、病院、空港・KTX、教会・聖堂などの宗教施設など、音声で情報が伝えられる幅広い場所を活用対象として考えています。環境ごとの適用可否はお問い合わせください。'],
-    ['SyncSLを実際に見ることはできますか？', '現在デモ版まで開発しており、このページのSyncSLデモで実際のデモ画面をもとにした画像をご覧いただけます。デモのご依頼や協業については、Contact Usからお問い合わせください。'],
+    ['SyncSLを実際に見ることはできますか？', '現在デモ版まで開発しており、SyncSLソリューションのページで、実際のデモ画面をもとにした画像をご覧いただけます。デモのご依頼や協業については、Contact Usからお問い合わせください。'],
     ['英語・日本語のページは、その手話への対応も意味しますか？', 'いいえ。サイトの韓国語・英語・日本語への対応と、製品の対応手話は別です。各製品の対応手話や提供時期については、個別にお問い合わせください。'],
-    ['製品の導入や協業について相談するには？', '下のContact Usでメールアドレス、件名、本文を入力し、メールの下書きを作成するか、hunylee0@gmail.comへ直接ご連絡ください。製品の提供範囲や日程はご相談のうえご案内します。'],
+    ['製品の導入や協業について相談するには？', 'Contact Usページでメールアドレス、件名、本文を入力し、メールの下書きを作成するか、hunylee0@gmail.comへ直接ご連絡ください。製品の提供範囲や日程はご相談のうえご案内します。'],
   ],
   contactTitle: 'あなたの現場の話を\n聞かせてください。', contactIntro: '製品の導入、協業、ご質問まで。\n必要なコミュニケーションを一緒に考えましょう。',
   email: 'メールアドレス', subject: '件名', message: '本文', subjectPlaceholder: 'どのようなご相談でしょうか？', messagePlaceholder: '利用する場所や必要な案内内容をお知らせください。',
@@ -133,7 +159,20 @@ const ja: typeof ko = {
   ready: '下書きができました。まだ送信されていません。メールアプリで内容を確認し、送信してください。',
   invalid: 'メールアドレスの形式、件名、本文を確認してください。空白だけでは入力できません。',
   privacy: '識別番号や健康情報など、機微な個人情報は記載しないでください。',
-  footerLine: '日常をつなぐAI手話技術。', business: '事業者登録番号', representative: '代表', representativeName: '이태헌（イ・テホン）', top: 'ページの先頭へ',
+  pageMeta: {
+    about: ['紹介 | NextRun', 'NextRunは、ろう者の言語と情報へのアクセスを中心にAI手話技術をつくる会社です。会社紹介、沿革、会社情報をご案内します。'],
+    products: ['製品紹介 | NextRun', 'AI実写手話アバター、AIリアルタイムGlossベース字幕、SyncSLソリューション。NextRunの3つのAI手話製品をご紹介します。'],
+    news: ['ニュース | NextRun', 'NextRunの製品ニュースや活動をお伝えします。'],
+    qa: ['Q&A | NextRun', 'ろう者向け字幕、活用場所、SyncSLのデモ、導入のご相談など、NextRunの製品についてよくある質問をまとめました。'],
+    contact: ['Contact Us | NextRun', '製品の導入、協業、ご質問はNextRunへ。メールの下書きを作成し、hunylee0@gmail.comへ送信できます。'],
+    notFound: ['ページが見つかりません | NextRun', 'お探しのページが見つかりませんでした。'],
+  },
+  allProducts: '製品一覧', more: '詳しく見る', aboutMore: 'NextRunについて', breadcrumb: '現在の位置', homeLabel: 'ホーム',
+  openMenu: 'メニューを開く', closeMenu: 'メニューを閉じる', submenu: 'サブメニュー',
+  features: '主な特徴', otherProducts: 'ほかの製品', valuesTitle: 'NextRunの姿勢', aboutProducts: 'NextRunがつくる製品',
+  companyInfo: '会社情報', companyName: '会社名',
+  notFoundTitle: 'ページが見つかりません。', notFoundText: 'アドレスが変更されたか、存在しないページです。ホームやメニューからお探しください。', backHome: 'ホームへ戻る',
+  footerLine: '日常をつなぐAI手話技術。', business: '事業者登録番号', representative: '代表', representativeName: '이태헌（イ・テホン）',
 };
 
 export const locales = { ko, en, ja };

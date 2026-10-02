@@ -2,26 +2,40 @@ import { renderToString } from 'react-dom/server';
 import App from './App';
 import { locales } from './locales';
 import type { Locale } from './locales';
-import { localePaths, origin } from './site';
+import { localePaths, origin, pagePaths, pageUrl, productPages } from './site';
+import type { Page } from './site';
+
+export { origin, pagePaths, pageUrl };
 
 const ogLocales: Record<Locale, string> = { ko: 'ko_KR', en: 'en_US', ja: 'ja_JP' };
 const escape = (value: string) => value.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
-export function render(locale: Locale): string {
-  return renderToString(<App locale={locale} />);
+export function render(locale: Locale, page: Page | null): string {
+  return renderToString(<App locale={locale} page={page} />);
 }
 
-export function head(locale: Locale): string {
-  const { title, description } = locales[locale].meta;
-  const url = origin + localePaths[locale];
+function meta(locale: Locale, page: Page | null): [string, string] {
+  const t = locales[locale];
+  const product = t.products[productPages.indexOf(page as typeof productPages[number])];
+  if (page === 'home') return [t.meta.title, t.meta.description];
+  if (product) return [`${product.name} | NextRun`, product.description];
+  return t.pageMeta[(page ?? 'notFound') as keyof typeof t.pageMeta] as [string, string];
+}
+
+// A null page is the 404 page: no canonical or alternates, and kept out of search results.
+export function head(locale: Locale, page: Page | null): string {
+  const [title, description] = meta(locale, page);
+  const url = origin + pageUrl(locale, page ?? 'home');
   const image = `${origin}/og-${locale}.png`;
   const organization = { '@context': 'https://schema.org', '@type': 'Organization', name: 'NextRun', url: origin + '/', logo: `${origin}/logo.png`, email: 'hunylee0@gmail.com' };
   return [
     `<title>${escape(title)}</title>`,
     `<meta name="description" content="${escape(description)}" />`,
-    `<link rel="canonical" href="${url}" />`,
-    ...(Object.keys(localePaths) as Locale[]).map(code => `<link rel="alternate" hreflang="${code}" href="${origin}${localePaths[code]}" />`),
-    `<link rel="alternate" hreflang="x-default" href="${origin}/" />`,
+    ...(page ? [
+      `<link rel="canonical" href="${url}" />`,
+      ...(Object.keys(localePaths) as Locale[]).map(code => `<link rel="alternate" hreflang="${code}" href="${origin}${pageUrl(code, page)}" />`),
+      `<link rel="alternate" hreflang="x-default" href="${origin}${pageUrl('ko', page)}" />`,
+    ] : ['<meta name="robots" content="noindex" />']),
     '<meta property="og:type" content="website" />',
     '<meta property="og:site_name" content="NextRun" />',
     `<meta property="og:url" content="${url}" />`,
