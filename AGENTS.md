@@ -1,7 +1,7 @@
 # NextRun Homepage - AGENTS.md
 
 ## Project Overview
-This document contains instructions for AI agents working on the NextRun homepage project. The app is a React 19 + TypeScript 6 + Vite 8 single-page frontend using @astryxdesign/core, rebuilt around NextRun's AI sign-language products. Product descriptions express direction, not verified availability or deployment claims.
+This document contains instructions for AI agents working on the NextRun homepage project. The app is a React 19 + TypeScript 6 + Vite 8 multi-page (prerendered) frontend using @astryxdesign/core, rebuilt around NextRun's AI sign-language products. Product descriptions express direction, not verified availability or deployment claims.
 
 ## Company Information
 - Company Name: NextRun
@@ -18,12 +18,14 @@ The website should include the following menu items, in this top-menu order:
 - 소식: NextRun의 새로운 소식
 - Q&A: provide an entry to Q&A
 - Contact Us (연락처): 문의 사항 form with 이메일, 제목, 내용
+- 채용 (recruiting) is on hold until the business becomes a corporation; do not add it yet.
+- Every menu item is its own page (paths in `src/site.ts` `pagePaths`): `/about/` (회사 소개 `#company`, 연혁 `#history`), `/products/` with detail pages `/products/avatar/`, `/products/gloss/`, `/products/syncsl/`, then `/news/`, `/qa/`, `/contact/`. 소개 and 제품소개 have dropdown submenus on desktop; below 1024px the menu folds behind a menu button with all submenu links listed. The home page is a short overview linking to these pages.
 
 ## Brand and Product Requirements
 - Use `src/assets/NextRun-logo.png` for the NextRun logo; it must appear in the home navigation and main/hero area, not just as a text name or rocket icon.
 - Produce a design proposal appropriate for an AI sign-language specialist as part of the rebuild.
 - AI 실시간 Gloss 기반 자막 translates live speech into captions for Deaf users, not standard captions. Use cases (the `spaces` list, kept in sync across ko/en/ja) include public offices, courts, schools, academic seminars, theaters, hospitals, airports/KTX, and religious facilities (churches, cathedrals).
-- SyncSL recognizes signing through a camera and shows Korean text. Its demo section (`#demo`) uses `src/assets/sign-demo.svg`, a redrawn illustration of the real demo capture with the person replaced by a character for portrait rights. Never publish the original capture or a real person's likeness.
+- SyncSL recognizes signing through a camera and shows Korean text. Its demo section (`#demo` on `/products/syncsl/`) uses `src/assets/sign-demo.svg`, a redrawn illustration of the real demo capture with the person replaced by a character for portrait rights. Never publish the original capture or a real person's likeness.
 - Replace the legacy NextAI/NextCloud/NextData positioning in both page content and SEO metadata; do not invent company history or news to fill the new sections.
 
 ## Localization Requirements
@@ -31,7 +33,7 @@ Support for three languages:
 - Korean (한국어) - Default
 - English (English)
 - Japanese (日本語)
-- `src/locales.ts` holds typed `ko`, `en`, and `ja` copy for navigation, products, contact, footer, and metadata. Each language has its own page: `/` (Korean), `/en/`, `/ja/`. Legacy `?lang=` links redirect to those paths, and a saved `nextrun-locale` preference redirects only from `/`; the language links save the chosen language before navigating.
+- `src/locales.ts` holds typed `ko`, `en`, and `ja` copy for navigation, products, contact, footer, and metadata. Each language has its own set of pages under `/` (Korean), `/en/`, `/ja/`; language links keep the current page. Legacy `?lang=` links redirect to those paths, old one-page anchors such as `/#contact` redirect to their new page (`legacyRedirect` in `src/site.ts`), and a saved `nextrun-locale` preference redirects only from `/`; the language links save the chosen language before navigating.
 
 ## Development Guidelines
 1. Maintain consistent styling with existing @astryxdesign/core components
@@ -49,17 +51,17 @@ Support for three languages:
 - `npm run lint` — `oxlint`, configured in `.oxlintrc.json` with React, TypeScript, and Oxc plugins.
 - `npm run preview` — Vite preview of the built site.
 - `node --experimental-strip-types --test tests/site.test.mjs` — dependency-free locale, copy-parity, and email-draft tests (verified with Node 22.22.3).
-- In the Vite page console, run `await (await import('/tests/browser-smoke.js')).smoke()` for all three languages and mobile. It checks logos, menus, metadata, Q&A, contact, and overflow; it fills/resets inputs but sends no email.
+- In the Vite page console, run `await (await import('/tests/browser-smoke.js')).smoke()` for all three languages and mobile. Run it on any page; it checks logos, menus and submenus, metadata, page-specific content, Q&A, contact, and overflow; it fills/resets inputs but sends no email.
 - No test framework or checked-in CI workflow is configured; run lint, build, and the checks above.
 
 ## Code Layout and Observed Conventions
 - `src/main.tsx` mounts `App` under React StrictMode and imports `src/index.css`.
-- `src/App.tsx` renders the homepage and local `Contact` component; navigation uses anchors. `src/site.ts` owns locale resolution and validated mailto draft construction.
+- `src/App.tsx` renders every page (`App` takes `locale` and `page`; `null` is the 404 page) with local components (`Header`, `PageHead`, `ProductCards`, `Contact`, ...). Navigation uses plain links between prerendered pages. `src/site.ts` owns page paths, locale resolution, legacy-anchor redirects and validated mailto draft construction.
 - Import design-system components through subpaths such as `@astryxdesign/core/Button`; layout uses semantic HTML, contact uses native inputs, and Q&A uses details/summary.
 - `src/index.css` imports the design-system reset before `astryx.css`; retain this order. `src/App.css` is the active responsive design, with `--nr-*` tokens and mobile breakpoints.
 - App.tsx uses single-quoted imports and semicolons; main.tsx and Vite config omit semicolons. Match the file being edited rather than reformatting unrelated code.
 - TypeScript uses project references, bundler resolution for app code, and checks unused locals/parameters. `verbatimModuleSyntax` requires type-only imports for types.
-- `npm run build` prerenders `dist/index.html`, `dist/en/index.html`, and `dist/ja/index.html` (`src/entry-server.tsx` + `scripts/prerender.mjs`), each with its own lang, title, description, canonical, hreflang, Open Graph image (`public/og-*.png`), and Organization JSON-LD; `main.tsx` hydrates them. `index.html` holds the `<!--app-head-->` marker. `public/robots.txt` and `public/sitemap.xml` list the three pages. GitHub Pages redirects `/en` and `/ja` to their trailing-slash directories.
+- `npm run build` prerenders every page in every language (27 `index.html` files), plus `dist/404.html` (noindex; GitHub Pages serves it for unknown paths) and `dist/sitemap.xml` (`src/entry-server.tsx` + `scripts/prerender.mjs`). Each page has its own lang, title, description, canonical, hreflang, Open Graph image (`public/og-*.png`), and Organization JSON-LD; `main.tsx` hydrates them. Page titles/descriptions come from `meta`, `pageMeta` and the product copy in `src/locales.ts`. `index.html` holds the `<!--app-head-->` marker. `public/robots.txt` points to the generated sitemap. GitHub Pages redirects paths without a trailing slash to their directories.
 
 ## Pitfalls and Current Gaps
 - Use the exact hyphenated logo filename above, imported in header/hero. Favicons are `public/icon-32.png` and `public/apple-touch-icon.png`, padded from that logo. The original small raster asset is not a high-resolution illustration.
@@ -71,7 +73,7 @@ Support for three languages:
 
 ## Deployment Instructions
 - Hosting is GitHub Pages. `.github/workflows/deploy.yml` runs lint, tests and `npm run build` on every push to `main`, then publishes `dist/`.
-- One-time repository settings: Settings → Pages → Source "GitHub Actions"; Custom domain `www.nextrun.site` with Enforce HTTPS; GitHub redirects `nextrun.site` to it. `src/site.ts` `origin`, `public/sitemap.xml` and `public/robots.txt` use the www address. A `CNAME` file is not used with Actions deployments.
+- One-time repository settings: Settings → Pages → Source "GitHub Actions"; Custom domain `www.nextrun.site` with Enforce HTTPS; GitHub redirects `nextrun.site` to it. `src/site.ts` `origin` (used for the generated sitemap) and `public/robots.txt` use the www address. A `CNAME` file is not used with Actions deployments.
 - DNS is at Gabia: apex `A` records to 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153, and `www` `CNAME` to `hunylee.github.io`.
 - The site is served from the domain root, so Vite needs no `base` setting. There are no PR preview deployments; check changes locally with `npm run build && npm run preview`.
 

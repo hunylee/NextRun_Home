@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { resolveLocale, localeFromPath, localePaths, emailDraft } from '../src/site.ts';
+import { resolveLocale, localeFromPath, localePaths, emailDraft, pageFromPath, pageUrl, pagePaths, legacyRedirect } from '../src/site.ts';
 import { locales } from '../src/locales.ts';
 
 test('URL language wins; unknown languages use Korean; missing URL uses valid saved preference', () => {
@@ -17,6 +17,28 @@ test('language pages live at /, /en/ and /ja/', () => {
   assert.equal(localeFromPath('/ja'), 'ja');
   assert.equal(localeFromPath('/english/'), 'ko');
   assert.deepEqual(localePaths, { ko: '/', en: '/en/', ja: '/ja/' });
+});
+
+test('each menu and product has its own page in every language', () => {
+  assert.equal(pageUrl('ko', 'about'), '/about/');
+  assert.equal(pageUrl('en', 'syncsl'), '/en/products/syncsl/');
+  assert.equal(pageUrl('ja', 'home'), '/ja/');
+  for (const locale of ['ko', 'en', 'ja']) {
+    for (const page of Object.keys(pagePaths)) assert.equal(pageFromPath(pageUrl(locale, page)), page);
+  }
+  assert.equal(pageFromPath('/products/gloss'), 'gloss');
+  assert.equal(pageFromPath('/en/careers/'), null);
+  assert.equal(pageFromPath('/products/unknown/'), null);
+});
+
+test('old one-page anchors move to their new pages', () => {
+  assert.equal(legacyRedirect('ko', '#contact'), '/contact/');
+  assert.equal(legacyRedirect('en', '#captions'), '/en/products/gloss/');
+  assert.equal(legacyRedirect('ja', '#demo'), '/ja/products/syncsl/#demo');
+  assert.equal(legacyRedirect('ko', '#history'), '/about/#history');
+  assert.equal(legacyRedirect('ko', '#main'), null);
+  assert.equal(legacyRedirect('ko', '#constructor'), null);
+  assert.equal(legacyRedirect('ko', ''), null);
 });
 
 test('email draft encodes multilingual data without injecting headers', () => {
