@@ -98,7 +98,7 @@ p { word-break: keep-all; overflow-wrap: anywhere; }
 .demo-figure { margin-top: 48px; }
 .demo-figure img { display: block; width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--nr-line); }
 .demo-figure figcaption { margin-top: 14px; font-size: 13px; }
-.spaces { --sp-bg: #1a2c4a; --sp-text: #f3f6fb; --sp-muted: #c3cfe0; --sp-line: #4a5f82; --sp-accent: #a8d0ff; background: var(--sp-bg); color: var(--sp-text); }
+.spaces { --sp-bg: var(--nr-ink); --sp-text: #eff6ee; --sp-muted: #bfd0c6; --sp-line: #507069; --sp-accent: #c9edab; background: var(--sp-bg); color: var(--sp-text); }
 .spaces .eyebrow { color: var(--sp-accent); }
 .spaces .section-copy { color: var(--sp-muted); margin-top: 20px; font-size: 14px; }
 .space-grid { display: grid; grid-template-columns: repeat(4, 1fr); row-gap: 40px; margin-top: 48px; }
