@@ -22,7 +22,7 @@ The website should include the following menu items, in this top-menu order:
 ## Brand and Product Requirements
 - Use `src/assets/NextRun-logo.png` for the NextRun logo; it must appear in the home navigation and main/hero area, not just as a text name or rocket icon.
 - Produce a design proposal appropriate for an AI sign-language specialist as part of the rebuild.
-- AI 실시간 Gloss 기반 자막 translates live speech into captions for Deaf users, not standard captions. Use cases include religious facilities (churches, cathedrals), hospital information desks, airports, and KTX.
+- AI 실시간 Gloss 기반 자막 translates live speech into captions for Deaf users, not standard captions. Use cases (the `spaces` list, kept in sync across ko/en/ja) include public offices, courts, schools, academic seminars, theaters, hospitals, airports/KTX, and religious facilities (churches, cathedrals).
 - SyncSL recognizes signing through a camera and shows Korean text. Its demo section (`#demo`) uses `src/assets/sign-demo.svg`, a redrawn illustration of the real demo capture with the person replaced by a character for portrait rights. Never publish the original capture or a real person's likeness.
 - Replace the legacy NextAI/NextCloud/NextData positioning in both page content and SEO metadata; do not invent company history or news to fill the new sections.
 

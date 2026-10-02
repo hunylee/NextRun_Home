@@ -36,7 +36,7 @@ test('all locales carry matching copy structure and complete product/menu conten
     assert.deepEqual(shape(copy), shape(locales.ko));
     assert.equal(copy.products.length, 3);
     assert.equal(copy.nav.length, 5);
-    assert.equal(copy.spaces.length, 4);
+    assert.equal(copy.spaces.length, 8);
     assert.ok(copy.representativeName.includes('이태헌'));
   }
 });
