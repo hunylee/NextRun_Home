@@ -24,20 +24,19 @@
 
 ### 4. Domain Configuration
 - Document that nextrun.site is purchased from Gabia
-- Prepare DNS configuration for Vercel/GitHub integration
+- DNS points nextrun.site at GitHub Pages (see AGENTS.md Deployment Instructions)
 - Set up appropriate CNAME or A records
 - Configure SSL/TLS certificates for secure connection
 
 ### 5. GitHub and Deployment Workflow
 - Follow conventional commit messages
-- Push/deploy only when explicitly requested; automatic deployment is not configured in this repository.
+- Merging to `main` deploys to GitHub Pages via `.github/workflows/deploy.yml`; push/merge only when explicitly requested.
 - Use pull requests for feature development
 - Tag releases appropriately
 - Monitor deployment status and logs
 
-### 6. Vercel/GitHub Domain Connection
-- For Vercel: Add domain in project settings, configure DNS
-- For GitHub Pages: Configure custom domain in repo settings
+### 6. GitHub Pages Domain Connection
+- Configure the custom domain in repo Settings → Pages
 - Set up proper redirects (www to non-www or vice versa)
 - Verify domain ownership through provider validation
 

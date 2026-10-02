@@ -59,7 +59,7 @@ Support for three languages:
 - `src/index.css` imports the design-system reset before `astryx.css`; retain this order. `src/App.css` is the active responsive design, with `--nr-*` tokens and mobile breakpoints.
 - App.tsx uses single-quoted imports and semicolons; main.tsx and Vite config omit semicolons. Match the file being edited rather than reformatting unrelated code.
 - TypeScript uses project references, bundler resolution for app code, and checks unused locals/parameters. `verbatimModuleSyntax` requires type-only imports for types.
-- `npm run build` prerenders `dist/index.html`, `dist/en/index.html`, and `dist/ja/index.html` (`src/entry-server.tsx` + `scripts/prerender.mjs`), each with its own lang, title, description, canonical, hreflang, Open Graph image (`public/og-*.png`), and Organization JSON-LD; `main.tsx` hydrates them. `index.html` holds the `<!--app-head-->` marker. `public/robots.txt` and `public/sitemap.xml` list the three pages; `vercel.json` enforces trailing slashes.
+- `npm run build` prerenders `dist/index.html`, `dist/en/index.html`, and `dist/ja/index.html` (`src/entry-server.tsx` + `scripts/prerender.mjs`), each with its own lang, title, description, canonical, hreflang, Open Graph image (`public/og-*.png`), and Organization JSON-LD; `main.tsx` hydrates them. `index.html` holds the `<!--app-head-->` marker. `public/robots.txt` and `public/sitemap.xml` list the three pages. GitHub Pages redirects `/en` and `/ja` to their trailing-slash directories.
 
 ## Pitfalls and Current Gaps
 - Use the exact hyphenated logo filename above, imported in header/hero. Favicons are `public/icon-32.png` and `public/apple-touch-icon.png`, padded from that logo. The original small raster asset is not a high-resolution illustration.
@@ -70,11 +70,10 @@ Support for three languages:
 - README.md is Vite template documentation and Plan.md is empty; neither defines the new product requirements. No required app environment variables are referenced by the current source/config.
 
 ## Deployment Instructions
-1. Push changes to GitHub repository
-2. Connect nextrun.site domain via Vercel or GitHub Pages
-3. Configure environment variables for production
-4. Set up custom domain verification
-- These are deployment goals, not verified automation: no provider configuration or CI workflow is checked in. Push/deploy only when explicitly requested; a GitHub Pages subpath deployment would need an appropriate Vite base and routing strategy.
+- Hosting is GitHub Pages. `.github/workflows/deploy.yml` runs lint, tests and `npm run build` on every push to `main`, then publishes `dist/`.
+- One-time repository settings: Settings → Pages → Source "GitHub Actions"; Custom domain `nextrun.site` with Enforce HTTPS. A `CNAME` file is not used with Actions deployments.
+- DNS is at Gabia: apex `A` records to 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153, and `www` `CNAME` to `hunylee.github.io`.
+- The site is served from the domain root, so Vite needs no `base` setting. There are no PR preview deployments; check changes locally with `npm run build && npm run preview`.
 
 ## Skills References
 Refer to SKILL.md for specific implementation guidelines and best practices.
