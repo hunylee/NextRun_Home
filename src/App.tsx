@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import type { FormEvent } from 'react';
 import { Button } from '@astryxdesign/core/Button';
 import logo from './assets/NextRun-logo.png';
 import signDemo from './assets/sign-demo.svg';
 import { locales } from './locales';
 import type { Copy, Locale } from './locales';
-import { emailDraft, localePaths, origin } from './site';
+import { emailDraft, localePaths } from './site';
 import './App.css';
 
 const sections = ['about', 'products', 'news', 'qa', 'contact'];
@@ -59,24 +59,6 @@ function saveLocale(code: string) {
 
 export default function App({ locale }: { locale: Locale }) {
   const t = locales[locale];
-  useEffect(() => {
-    // Built pages already carry this metadata; keep the dev server's single page in sync too.
-    document.documentElement.lang = locale;
-    document.title = t.meta.title;
-    const values: Record<string, string> = {
-      'meta[name="description"]': t.meta.description,
-      'meta[property="og:title"]': t.meta.title,
-      'meta[property="og:description"]': t.meta.description,
-      'meta[property="og:url"]': origin + localePaths[locale],
-      'meta[property="og:locale"]': { ko: 'ko_KR', en: 'en_US', ja: 'ja_JP' }[locale],
-      'meta[name="twitter:title"]': t.meta.title,
-      'meta[name="twitter:description"]': t.meta.description,
-    };
-    Object.entries(values).forEach(([selector, content]) => document.querySelector(selector)?.setAttribute('content', content));
-    document.querySelector('link[rel="canonical"]')?.setAttribute('href', origin + localePaths[locale]);
-    saveLocale(locale);
-  }, [locale, t]);
-
   return (
     <>
       <a className="skip-link" href="#main">{t.skip}</a>
@@ -151,7 +133,7 @@ export default function App({ locale }: { locale: Locale }) {
         <Contact t={t} />
       </main>
 
-      <footer><div className="wrap"><div className="footer-top"><a className="footer-brand" href="#home">NextRun<span>{t.footerLine}</span></a><a className="text-link" href="#home">{t.top} ↑</a></div><div className="footer-bottom"><div><a href="mailto:hunylee0@gmail.com">{t.email} : hunylee0@gmail.com</a><span>{t.business} : 440-09-03154</span><span>{t.representative} : {t.representativeName}</span></div><span>© {new Date().getFullYear()} NextRun</span></div></div></footer>
+      <footer><div className="wrap"><div className="footer-top"><a className="footer-brand" href="#home">NextRun<span>{t.footerLine}</span></a><a className="text-link" href="#home">{t.top} ↑</a></div><div className="footer-bottom"><div><a href="mailto:hunylee0@gmail.com">{t.email} : hunylee0@gmail.com</a><span>{t.business} : 440-09-03154</span><span>{t.representative} : {t.representativeName}</span></div><span suppressHydrationWarning>© {new Date().getFullYear()} NextRun</span></div></div></footer>
     </>
   );
 }

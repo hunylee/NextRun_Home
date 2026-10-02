@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local code index (symlink to a machine-specific path)
+.codegraph

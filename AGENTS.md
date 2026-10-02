@@ -44,8 +44,8 @@ Support for three languages:
 ## Dev Environment and Commands
 - Use npm with the committed `package-lock.json` (lockfile v3); install dependencies with `npm ci`.
 - The locked Vite requires Node `^20.19.0 || >=22.12.0`; the repo has no Node version pin.
-- `npm run dev` — Vite development server; `vite.config.ts` only enables the React plugin, with no custom port or base path.
-- `npm run build` — `tsc -b && vite build`; output is `dist/`.
+- `npm run dev` — Vite development server; `vite.config.ts` enables the React plugin and a dev-only plugin that fills the same per-language head as the prerendered build, with no custom port or base path.
+- `npm run build` — `tsc -b`, client and SSR Vite builds, then `scripts/prerender.mjs`; output is `dist/`.
 - `npm run lint` — `oxlint`, configured in `.oxlintrc.json` with React, TypeScript, and Oxc plugins.
 - `npm run preview` — Vite preview of the built site.
 - `node --experimental-strip-types --test tests/site.test.mjs` — dependency-free locale, copy-parity, and email-draft tests (verified with Node 22.22.3).
