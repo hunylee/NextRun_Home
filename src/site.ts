@@ -1,6 +1,6 @@
 import type { Locale } from './locales.ts';
 
-export const origin = 'https://nextrun.site';
+export const origin = 'https://www.nextrun.site';
 export const localePaths: Record<Locale, string> = { ko: '/', en: '/en/', ja: '/ja/' };
 
 export function localeFromPath(pathname: string): Locale {

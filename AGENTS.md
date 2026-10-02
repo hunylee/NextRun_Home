@@ -71,7 +71,7 @@ Support for three languages:
 
 ## Deployment Instructions
 - Hosting is GitHub Pages. `.github/workflows/deploy.yml` runs lint, tests and `npm run build` on every push to `main`, then publishes `dist/`.
-- One-time repository settings: Settings → Pages → Source "GitHub Actions"; Custom domain `nextrun.site` with Enforce HTTPS. A `CNAME` file is not used with Actions deployments.
+- One-time repository settings: Settings → Pages → Source "GitHub Actions"; Custom domain `www.nextrun.site` with Enforce HTTPS; GitHub redirects `nextrun.site` to it. `src/site.ts` `origin`, `public/sitemap.xml` and `public/robots.txt` use the www address. A `CNAME` file is not used with Actions deployments.
 - DNS is at Gabia: apex `A` records to 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153, and `www` `CNAME` to `hunylee.github.io`.
 - The site is served from the domain root, so Vite needs no `base` setting. There are no PR preview deployments; check changes locally with `npm run build && npm run preview`.
 
