@@ -1,4 +1,4 @@
-:root { color-scheme: light; --nr-ink: #153b36; --nr-muted: #516a65; --nr-green: #126b50; --nr-lime: #c9edab; --nr-line: #d9e2dc; --nr-paper: #fafbf7; }
+:root { color-scheme: light; --nr-ink: #153b36; --nr-muted: #516a65; --nr-green: #126b50; --nr-lime: #c9edab; --nr-line: #e2ddd3; --nr-paper: #faf8f3; --nr-sand: #f3efe6; --nr-card: #fffdf8; --nr-sage: #e8eee6; }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 110px; }
 body { color: var(--nr-ink); background: var(--nr-paper); font-family: 'Pretendard Variable', 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Hiragino Kaku Gothic ProN', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
@@ -73,13 +73,13 @@ p { word-break: keep-all; overflow-wrap: anywhere; }
 .history h3 { font-size: 19px; margin-top: 8px; }
 .history .mini-label { color: var(--nr-muted); }
 .history p { font-size: 14px; color: var(--nr-muted); line-height: 1.9; }
-.products { background: #eef2eb; }
+.products { background: var(--nr-sand); }
 .split-heading { align-items: end; }
 .split-heading > p { max-width: 420px; }
 .product-nav { display: flex; gap: 24px; flex-wrap: wrap; padding: 32px 0 24px; }
 .product-nav a { font-size: 13px; min-height: 44px; display: inline-flex; align-items: center; gap: 12px; }
 .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.product-card { display: flex; flex-direction: column; padding: 30px 26px 0; background: var(--nr-paper); border: 1px solid #d9e2d6; border-radius: 5px; }
+.product-card { display: flex; flex-direction: column; padding: 30px 26px 0; background: var(--nr-card); border: 1px solid #e0d9cc; border-radius: 5px; }
 .product-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 40px; }
 .product-number { font: 34px ui-monospace, monospace; letter-spacing: -.05em; }
 .product-top .mini-label { font-size: 12px; letter-spacing: 0; text-align: right; }
@@ -92,8 +92,8 @@ p { word-break: keep-all; overflow-wrap: anywhere; }
 .product-link { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: auto; border-top: 1px solid var(--nr-line); min-height: 66px; font-size: 13px; font-weight: 650; }
 .product-link:hover { text-decoration: underline; }
 .product-demo-link + .product-link { margin-top: 0; }
-.product-1 { background: #d6ebcd; border-color: #bad5b1; }
-.product-1 .product-link { border-color: #b8d0b0; }
+.product-1 { background: var(--nr-sage); border-color: #c9d6c6; }
+.product-1 .product-link { border-color: #c9d6c6; }
 .product-note { margin-top: 24px; }
 .demo-figure { margin-top: 48px; }
 .demo-figure img { display: block; width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--nr-line); }
@@ -127,19 +127,19 @@ p { word-break: keep-all; overflow-wrap: anywhere; }
 .expand { font-size: 20px; margin-left: auto; }
 details[open] .expand { transform: rotate(45deg); }
 .questions details p { padding: 0 32px 26px; font-size: 14px; line-height: 1.9; color: var(--nr-muted); }
-.contact { background: #e6eddf; }
+.contact { background: var(--nr-sage); }
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; }
 .contact .section-copy { margin-top: 24px; }
 .contact-email { display: inline-flex; gap: 30px; font-size: clamp(18px, 2vw, 25px); font-weight: 500; border-bottom: 1px solid #789582; padding-block: 16px; margin-block: 26px; }
 .contact-grid > div > .fine-print { max-width: 380px; }
 .contact form { display: flex; flex-direction: column; align-items: stretch; }
 .contact label { font-size: 13px; font-weight: 600; margin-bottom: 10px; }
-.contact input, .contact textarea { background: #fafbf7; color: var(--nr-ink); border: 1px solid #a7b8a7; border-radius: 4px; padding: 14px; font-size: 14px; width: 100%; min-height: 48px; margin-bottom: 22px; }
+.contact input, .contact textarea { background: var(--nr-card); color: var(--nr-ink); border: 1px solid #a7b8a7; border-radius: 4px; padding: 14px; font-size: 14px; width: 100%; min-height: 48px; margin-bottom: 22px; }
 .contact textarea { resize: vertical; }
 .contact input::placeholder, .contact textarea::placeholder { color: #63766d; opacity: 1; }
 .contact form .site-button { align-self: start; margin-top: 20px; }
 .form-error { margin-top: 16px; color: #95252b; font-size: 14px; }
-.draft-result { margin-top: 20px; padding: 18px; background: #fafbf7; border: 1px solid #789582; font-size: 14px; line-height: 1.8; }
+.draft-result { margin-top: 20px; padding: 18px; background: var(--nr-card); border: 1px solid #789582; font-size: 14px; line-height: 1.8; }
 .draft-result a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; font-weight: 650; }
 footer { background: var(--nr-paper); padding: 48px 0 24px; }
 .footer-top { display: flex; justify-content: space-between; align-items: center; padding-bottom: 36px; border-bottom: 1px solid var(--nr-line); gap: 24px; }
