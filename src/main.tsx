@@ -1,5 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot, hydrateRoot } from 'react-dom/client'
+// The font ships with the site instead of loading from a CDN, so no third-party server is in the page.
+import 'pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css'
 import './index.css'
 import App from './App.tsx'
 import { legacyRedirect, localeFromPath, localePaths, pageFromPath, resolveLocale } from './site.ts'

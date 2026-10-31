@@ -5,13 +5,17 @@ import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 const { render, head, origin, pagePaths, pageUrl } = await import('../dist-ssr/entry-server.js');
 const template = await readFile('dist/index.html', 'utf8');
 const locales = ['ko', 'en', 'ja'];
+// GitHub Pages can't send security headers, so built pages carry their policy in a meta tag.
+// Only the site's own scripts, styles, fonts and images load. The dev server skips it because Vite injects inline scripts there.
+const csp = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests";
 
 async function write(file, locale, page) {
   const html = template
     .replace('<html lang="ko">', `<html lang="${locale}">`)
+    .replace('<meta charset="UTF-8" />', `<meta charset="UTF-8" />\n    <meta http-equiv="Content-Security-Policy" content="${csp}" />\n    <meta name="referrer" content="strict-origin-when-cross-origin" />`)
     .replace('<!--app-head-->', head(locale, page))
     .replace('<div id="root"></div>', `<div id="root">${render(locale, page)}</div>`);
-  if (html.includes('<!--app-head-->') || !html.includes(`lang="${locale}"`)) throw new Error(`Template markers missing for ${file}`);
+  if (html.includes('<!--app-head-->') || !html.includes('Content-Security-Policy') || !html.includes(`lang="${locale}"`)) throw new Error(`Template markers missing for ${file}`);
   await mkdir(file.slice(0, file.lastIndexOf('/')), { recursive: true });
   await writeFile(file, html);
 }
